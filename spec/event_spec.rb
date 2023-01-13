@@ -57,4 +57,35 @@ RSpec.describe FoodTruck do
     end
   end
 
+  describe 'Iteration 3' do
+    before do
+      food_truck1.stock(item1, 35)
+      food_truck1.stock(item2, 7)
+      food_truck2.stock(item4, 50)    
+      food_truck2.stock(item3, 25)
+      food_truck3.stock(item1, 65)
+
+      event.add_food_truck(food_truck1)    
+      event.add_food_truck(food_truck2)    
+      event.add_food_truck(food_truck3)
+    end
+
+    it 'can tell if #overstocked_items' do
+      expect(event.overstocked_items).to eq([item1])
+    end
+
+    it 'can #list_all_food_names from all trucks alphabetically' do
+      expect(event.list_all_food_names).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
+    end
+
+    it 'can give a #total_inventory hash with total quantity and trucks where available' do
+      expected = {
+        item1=>{:total_quantity=>100, :food_trucks=>[food_truck1, food_truck3]},
+        item2=>{:total_quantity=>7, :food_trucks=>[food_truck1]},
+        item4=>{:total_quantity=>50, :food_trucks=>[food_truck2]},
+        item3=>{:total_quantity=>25, :food_trucks=>[food_truck2]}
+      }
+      expect(event.total_inventory).to eq(expected)
+    end
+  end
 end
