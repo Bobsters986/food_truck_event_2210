@@ -2,12 +2,9 @@ class Item
   attr_reader :name,
               :price
 
-  def initialize(attributes)
-    @name = attributes[:name]
-    @price = attributes[:price]
+  def initialize(info)
+    @name = info[:name]
+    @price = info[:price].delete_prefix('$').to_f
   end
 
-  def price_float
-    price.tr("$",'').to_f
-  end
 end

@@ -1,17 +1,19 @@
 require './lib/item'
+# require './lib/food_truck'
 
-describe Item do
-  let(:item1) {Item.new({name: 'Peach Pie (Slice)', price: "$3.75"})}
+RSpec.describe Item do
+  let(:item1) { Item.new({name: 'Peach Pie (Slice)', price: "$3.75"}) }
+  let(:item2) { Item.new({name: 'Apple Pie (Slice)', price: "$2.50"}) }
 
-  it 'exists and has attributes' do
-    expect(item1).to be_a Item
-    expect(item1.name).to eq('Peach Pie (Slice)')
-    expect(item1.price).to eq("$3.75")
-  end
+  describe '#initialize' do
+    it 'exists' do
+      expect(item1).to be_an(Item)
+    end
 
-  describe '#price_float' do
-    it 'returns the price as a float' do
-      expect(item1.price_float).to eq(3.75)
+    it 'has attributes' do
+      expect(item2.name).to eq("Apple Pie (Slice)")
+      expect(item2.price).to eq(2.50)
     end
   end
+
 end
